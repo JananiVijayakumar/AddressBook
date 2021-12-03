@@ -15,6 +15,7 @@ public class AddressBook {
     public ArrayList<AddressBookData> addressBookEntries = new ArrayList<>();
     public Map<String, ArrayList<AddressBookData>> bookDetails = new HashMap<>();
     public Map<String, ArrayList<AddressBookData>> multiAddressBook = new HashMap<>();
+    public Map<String, ArrayList<AddressBookData>> cityName = new HashMap<>();
     Scanner sc = new Scanner(System.in);
     public void addContactToAddressBook() {
         System.out.println("Enter Address Book Name :");
@@ -132,7 +133,10 @@ public class AddressBook {
     }
 
     public boolean takeOption() {
-        System.out.println("enter 1:add_contact 2:edit_contact or 0 to quit");
+        System.out.println("enter 1 to add_contact\n" +
+                " 2 to edit_contact\n" +
+                " 3 to view person by city\n" +
+                " 0: to quit");
         int option = sc.nextInt();
         boolean checkConditon = true;
         switch (option) {
@@ -141,6 +145,9 @@ public class AddressBook {
                 break;
             case 2:
                 editContactToAddressBook();
+                break;
+            case 3:
+                viewPersonByCity();
                 break;
             case 0:
                 checkConditon = false;
@@ -158,6 +165,22 @@ public class AddressBook {
             return checkDuplicates;
         } else {
             return checkDuplicates;
+        }
+    }
+
+    //UC8- search and View person by city
+    public void viewPersonByCity() {
+        System.out.println("Enter city");
+        String city = sc.next();
+        Boolean checkPersonByCity = false;
+        try {
+            checkPersonByCity = cityName.entrySet().stream().anyMatch(p -> p.getKey().equals(city));
+            if (checkPersonByCity == true)
+                cityName.entrySet().stream().filter(p -> p.getKey().equals(city)).forEach(System.out::println);
+            else
+                System.out.println("Not found!!");
+        } catch (Exception e) {
+            System.out.println("No-one Found!!");
         }
     }
 }
