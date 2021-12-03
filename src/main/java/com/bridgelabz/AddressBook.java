@@ -16,6 +16,8 @@ public class AddressBook {
     public Map<String, ArrayList<AddressBookData>> bookDetails = new HashMap<>();
     public Map<String, ArrayList<AddressBookData>> multiAddressBook = new HashMap<>();
     public Map<String, ArrayList<AddressBookData>> cityName = new HashMap<>();
+    public Map<String, ArrayList<AddressBookData>> stateName = new HashMap<>();
+
     Scanner sc = new Scanner(System.in);
     public void addContactToAddressBook() {
         System.out.println("Enter Address Book Name :");
@@ -136,6 +138,7 @@ public class AddressBook {
         System.out.println("enter 1 to add_contact\n" +
                 " 2 to edit_contact\n" +
                 " 3 to view person by city\n" +
+                " 4 to view person by state\n" +
                 " 0: to quit");
         int option = sc.nextInt();
         boolean checkConditon = true;
@@ -148,6 +151,9 @@ public class AddressBook {
                 break;
             case 3:
                 viewPersonByCity();
+                break;
+            case 4:
+                viewPersonByState();
                 break;
             case 0:
                 checkConditon = false;
@@ -179,6 +185,22 @@ public class AddressBook {
                 cityName.entrySet().stream().filter(p -> p.getKey().equals(city)).forEach(System.out::println);
             else
                 System.out.println("Not found!!");
+        } catch (Exception e) {
+            System.out.println("No-one Found!!");
+        }
+    }
+
+    //UC9- search and View person by state
+    public void viewPersonByState() {
+        System.out.println("Enter State :");
+        String state = sc.next();
+        Boolean checkPersonByState = true;
+        try {
+            checkPersonByState = stateName.entrySet().stream().anyMatch(p -> p.getKey().equals(state));
+            if (checkPersonByState == true)
+                cityName.entrySet().stream().filter(p -> p.getKey().equals(state)).forEach(System.out::println);
+            else
+                System.out.println("Person not found!!");
         } catch (Exception e) {
             System.out.println("No-one Found!!");
         }
