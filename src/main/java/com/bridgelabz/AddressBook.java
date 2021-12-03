@@ -48,8 +48,8 @@ public class AddressBook {
     private void checkAddressBookEntries(String bookName, String firstName, String lastName, String address, String city,String state, String email,  int zipCode, long phoneNumber) {
         AddressBookData addressBookData = new AddressBookData(bookName, firstName, lastName, address,email, city,state ,zipCode, phoneNumber);
         addressBookEntries.add(addressBookData);
-        bookDetails.put(firstName, addressBookEntries);
-        //UC11-Sort alphabetically by using person's name
+        bookDetails.put(city, addressBookEntries);
+        //UC11-Sort alphabetically by using city
         bookDetails.entrySet().stream().sorted(Comparator.comparing( p-> {
             return p.getKey();
         }));
