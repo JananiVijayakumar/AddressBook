@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Author : janani VijayaKumar
@@ -139,6 +140,7 @@ public class AddressBook {
                 " 2 to edit_contact\n" +
                 " 3 to view person by city\n" +
                 " 4 to view person by state\n" +
+                " 5 to count person by city or state\n" +
                 " 0: to quit");
         int option = sc.nextInt();
         boolean checkConditon = true;
@@ -154,6 +156,9 @@ public class AddressBook {
                 break;
             case 4:
                 viewPersonByState();
+                break;
+            case 5:
+                countPersonDetailsByCityOrState();
                 break;
             case 0:
                 checkConditon = false;
@@ -203,6 +208,27 @@ public class AddressBook {
                 System.out.println("Person not found!!");
         } catch (Exception e) {
             System.out.println("No-one Found!!");
+        }
+    }
+
+    //UC10-Counting the persons by using city name or state name
+    public void countPersonDetailsByCityOrState(){
+        System.out.println("Enter 1 for city\n" +
+                " 2 for state");
+        int option = sc.nextInt();
+        switch (option){
+            case 1:
+                System.out.println("Enter city name :");
+                String countByCity = sc.next();
+                Long countPerson = cityName.entrySet().stream().filter(p->p.getKey().equals(countByCity)).collect(Collectors.counting());
+                System.out.println(countByCity+" Persons : "+ countPerson);
+                break;
+            case 2:
+                System.out.println("Enter state name :");
+                String state = sc.next();
+                Long countPerson1 = stateName.entrySet().stream().filter(p->p.getKey().equals(state)).collect(Collectors.counting());
+                System.out.println(state+" Persons : "+ countPerson1);
+                break;
         }
     }
 }
