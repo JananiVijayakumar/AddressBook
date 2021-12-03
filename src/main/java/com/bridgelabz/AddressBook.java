@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +49,14 @@ public class AddressBook {
         AddressBookData addressBookData = new AddressBookData(bookName, firstName, lastName, address,email, city,state ,zipCode, phoneNumber);
         addressBookEntries.add(addressBookData);
         bookDetails.put(firstName, addressBookEntries);
+        //UC11-Sort alphabetically by using person's name
+        bookDetails.entrySet().stream().sorted(Comparator.comparing( p-> {
+            return p.getKey();
+        }));
+    }
+
+    public void printBookDetails(){
+        System.out.println(bookDetails);
     }
 
     public void editContactToAddressBook() {
@@ -141,6 +146,7 @@ public class AddressBook {
                 " 3 to view person by city\n" +
                 " 4 to view person by state\n" +
                 " 5 to count person by city or state\n" +
+                " 6 print the book list\n" +
                 " 0: to quit");
         int option = sc.nextInt();
         boolean checkConditon = true;
@@ -159,6 +165,9 @@ public class AddressBook {
                 break;
             case 5:
                 countPersonDetailsByCityOrState();
+                break;
+            case 6:
+                printBookDetails();
                 break;
             case 0:
                 checkConditon = false;
