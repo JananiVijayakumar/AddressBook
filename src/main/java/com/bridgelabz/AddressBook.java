@@ -147,6 +147,8 @@ public class AddressBook {
                 " 4 to view person by state\n" +
                 " 5 to count person by city or state\n" +
                 " 6 print the book list\n" +
+                " 7 to write a data to AddressBook file\n" +
+                " 8 to Read data from AddressBook file\n" +
                 " 0: to quit");
         int option = sc.nextInt();
         boolean checkConditon = true;
@@ -168,6 +170,12 @@ public class AddressBook {
                 break;
             case 6:
                 printBookDetails();
+                break;
+            case 7:
+                writeDataTOAddressBookFiles();
+                break;
+            case 8:
+                readDataFromAddressBookFiles();
                 break;
             case 0:
                 checkConditon = false;
@@ -239,5 +247,17 @@ public class AddressBook {
                 System.out.println(state+" Persons : "+ countPerson1);
                 break;
         }
+    }
+
+    //UC13-Write a data to Address book file
+    public void writeDataTOAddressBookFiles(){
+        new AddressBookFileIO().writeDataToAddressBook(addressBookEntries);
+        System.out.println("Address book Data successfully Writted in AddressBook.txt and stored");
+    }
+
+    //UC13-Read data from Address book file
+    public void readDataFromAddressBookFiles(){
+        new AddressBookFileIO().readDataFromAddressBook();
+        System.out.println("Address book Data successfully Readed From AddressBook.txt");
     }
 }
