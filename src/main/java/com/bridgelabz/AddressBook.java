@@ -35,6 +35,13 @@ public class AddressBook {
         int zipCode = sc.nextInt();
         System.out.println("Enter your Mobile number :");
         long mobileNumber = sc.nextLong();
+
+//check duplicate Entries
+        if (check(firstName)) {
+            checkAddressBookEntries(bookName, firstName, lastName, address, city, state, eMail,zipCode, mobileNumber);
+            System.out.println("AddressBookData{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", address='" + address + '\'' + ", city='" + city + '\'' + ", state='" + state + '\'' + ", eMail='" + eMail + '\'' + ", zip=" + zipCode + ", mobileNum=" + mobileNumber + '}');
+        } else
+            System.out.println("The " + firstName + " already exist!! \n use Another Name");
     }
 
     private void checkAddressBookEntries(String bookName, String firstName, String lastName, String address, String city,String state, String email,  int zipCode, long phoneNumber) {
@@ -142,5 +149,15 @@ public class AddressBook {
                 System.out.println("invalid input!! \n please enter new input!!");
         }
         return checkConditon;
+    }
+    //UC7-Check duplicates entries
+    public boolean check(String firstName) {
+        Boolean checkDuplicates = true;
+        if (addressBookEntries.stream().anyMatch(person -> person.getFirstName().equals(firstName))) {
+            checkDuplicates = false;
+            return checkDuplicates;
+        } else {
+            return checkDuplicates;
+        }
     }
 }
